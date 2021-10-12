@@ -1,0 +1,8 @@
+kind: ConfigMap
+metadata:
+  name: user-ca-bundle
+  namespace: openshift-config
+apiVersion: v1
+data:
+  ca-bundle.crt: |
+    ${vault:caas/data/openshift-config@ca-bundle.crt | indent4}

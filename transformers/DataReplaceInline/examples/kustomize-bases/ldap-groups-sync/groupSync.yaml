@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: List
+items:
+  - apiVersion: redhatcop.redhat.io/v1alpha1
+    kind: GroupSync
+    metadata:
+      name: ldap-group-sync
+      namespace: ldap-group-sync
+    spec:
+      providers:
+      - ldap:
+          credentialsSecret:
+            name: ldap-group-sync
+            namespace: ldap-group-sync
+          caSecret:
+            name: ca-secret
+            namespace: ldap-group-sync
+            key: ca-bundle.crt
+          insecure: false
+          rfc2307:
+            groupMembershipAttributes:
+            - member
+            groupNameAttributes:
+            - cn
+            groupUIDAttribute: dn
+            groupsQuery:
+              baseDN: "${vault:caas/data/sync-ldap@ldapGroupsQueryBaseDN}"
+              derefAliases: never
+              filter: "${vault:caas/data/sync-ldap@ldapGroupsQueryFilter}"
+              scope: sub
+            tolerateMemberNotFoundErrors: true
+            tolerateMemberOutOfScopeErrors: true
+            userNameAttributes:
+            - corpAliasLocal
+            userUIDAttribute: dn
+            usersQuery:
+              baseDN: "${vault:caas/data/sync-ldap@ldapUsersQueryBaseDN}"
+              derefAliases: never
+              scope: sub
+          url: ldaps://${git:LDAP_URL}:636/${git:LDAP_FILTER}
+        name: ldap
+

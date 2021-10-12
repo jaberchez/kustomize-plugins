@@ -1,0 +1,5 @@
+apiVersion: transformers.kustomize.com/v1
+kind: DataReplaceInline
+metadata:
+  name: ldap-groups-sync
+fileConf: "../cluster.ini"
