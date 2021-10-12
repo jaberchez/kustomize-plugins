@@ -48,7 +48,7 @@ If this file is not found or is not executable, kustomize will look for a file c
 If both checks fail, the plugin load fails the overall kustomize build.
 
 ## Execution
-Plugins are only used during a run of the kustomize build command with the parameter --enable_alpha_plugins
+Plugins are only used during a run of the kustomize build command with the parameter --enable-alpha-plugins
 ~~~
-kustomize build --enable_alpha_plugins kustomize_directory
+kustomize build --enable-alpha-plugins kustomize_directory
 ~~~
